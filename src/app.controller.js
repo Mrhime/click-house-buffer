@@ -32,7 +32,6 @@ export class AppController {
 
         })
 
-
         this.app.get('/redis/count', async (req, res) => {
             const value = await this.appService.redisService.getCount()
             res.json(value)
