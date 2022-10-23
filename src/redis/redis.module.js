@@ -1,6 +1,5 @@
-const redis = require("redis");
-
-class RedisModule {
+import redis from "redis"
+export class RedisModule {
     constructor(redisUrl) {
         this.redisClient = {}
         this.init(redisUrl)
@@ -17,4 +16,3 @@ class RedisModule {
         })();
     }
 }
-module.exports = RedisModule

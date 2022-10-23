@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  node14:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: node:14
+    container_name: node14
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - ch_server
+      - ch_client
+    networks:
+      - app
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis
+    volumes:
+      - ./cache:/data/db
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - app
+  ch_server:
+    image: yandex/clickhouse-server
+    ports:
+      - "8123:8123"
+    volumes:
+      - ./db:/var/lib/clickhouse
+    networks:
+      - app
+
+  ch_client:
+    image: yandex/clickhouse-client
+    entrypoint:
+      - /bin/sleep
+    command:
+      - infinity
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
+

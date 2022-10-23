@@ -1,8 +1,9 @@
 {
-  "name": "ch-app",
+  "name": "click-house-buffer",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/app.js",
